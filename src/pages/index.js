@@ -2,12 +2,12 @@ import React from "react"
 import { graphql } from "gatsby"
 import styled from "styled-components"
 import { Swiper, SwiperSlide } from 'swiper/react'
-import SwiperCore, { Navigation } from 'swiper';
+import SwiperCore, { Navigation } from 'swiper'
 
 import Img from "gatsby-image"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import 'swiper/swiper-bundle.min.css';
+import 'swiper/swiper-bundle.css'
 
 
 SwiperCore.use([Navigation])
@@ -48,8 +48,8 @@ const SliderSection = styled.section`
       height: 800px;
   }
 
-  img {
-    width:100%;
+  .gatsby-image-wrapper {
+    height: 100%;
   }
 
   .swiper-button-next, .swiper-button-prev {
@@ -132,7 +132,7 @@ const Slider = (props) => {
               <h2>{slide.title}</h2>
               <p>{slide.description}</p>
             </Container>
-            <img src={slide.image.fluid.src} data-srcset={slide.image.fluid.srcSet} alt={slide.image.title} />
+            <Img fluid={slide.image.fluid} />
           </SwiperSlide>
         ))}
       </Swiper>
@@ -202,7 +202,6 @@ export const query = graphql`
             srcSet
             sizes
           }
-          title
         }
       }
     }
