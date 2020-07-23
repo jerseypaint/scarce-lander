@@ -7,7 +7,7 @@ import SwiperCore, { Navigation } from 'swiper'
 import Img from "gatsby-image"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import "swiper/swiper-bundle.min.css"
+import "~swiper/swiper-bundle.min.css"
 
 
 SwiperCore.use([Navigation])
@@ -18,7 +18,7 @@ const Container = styled.div`
 
 const HeroSection = styled.section`
   margin-top: -95px;
-  
+
   h1 {
     text-align: center;
     font-size: 14px;
