@@ -80,12 +80,18 @@ const Form = styled.form`
     height: 38px;
     padding: 8px 12px;
     margin-bottom: 10px;
-    font-size: 14px;
+    font-size: 10px;
     line-height: 1.42857143;
+    color: #ff2b2b;
+    outline: none;
 
     &:focus {
       border: 1px solid #3898EC;
       border-radius: 0;
+    }
+
+    &::placeholder {
+      color: #ccc;
     }
   }
 
@@ -147,20 +153,20 @@ const ContactForm = (props) => {
           <Form action="https://ockupy.us11.list-manage.com/subscribe/post?u=253768e3965b590e3a100c35d&amp;id=6c8e8c91e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank" novalidate>
                 <h2>{props.title}</h2>
                 <label for="mce-FNAME">First Name </label>
-                <input type="text" value="" name="FNAME" id="mce-FNAME" />
+                <input type="text" defaultValue="" name="FNAME" id="mce-FNAME" />
 
-                <label for="mce-EMAIL">Email Address  <span>*</span></label>
-                <input type="email" value="" name="EMAIL" id="mce-EMAIL" />
+                <label for="mce-EMAIL">Email Address </label>
+                <input type="email" defaultValue="" name="EMAIL" id="mce-EMAIL" />
 
                 <label for="mce-PHONE">Phone Number </label>
-                <input type="text" name="PHONE" value="" id="mce-PHONE" />
+                <input type="text" name="PHONE" defaultValue="" id="mce-PHONE" placeholder="BE THE FIRST TO GET THE DROP" />
 
                 <div id="mce-responses">
                   <div id="mce-error-response"></div>
                   <div id="mce-success-response"></div>
                 </div>
                 <div aria-hidden="true" className="hidden"><input type="text" name="b_253768e3965b590e3a100c35d_6c8e8c91e8" tabindex="-1" value="" /></div>
-                <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" />
+                <input type="submit" value="Join Now" name="subscribe" id="mc-embedded-subscribe" />
           </Form>
         </div>
       </Container>
