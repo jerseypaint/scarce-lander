@@ -17,7 +17,8 @@ const Container = styled.div`
 `
 
 const HeroSection = styled.section`
-
+  margin-top: -95px;
+  
   h1 {
     text-align: center;
     font-size: 14px;
@@ -26,7 +27,7 @@ const HeroSection = styled.section`
     display: block;
     position: absolute;
     margin: 0 auto;
-    top: 301px;
+    top: 205px;
     left: 0;
     right: 0;
     vertical-align: middle;
