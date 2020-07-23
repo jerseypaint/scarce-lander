@@ -11,7 +11,6 @@ import { useStaticQuery, graphql } from "gatsby"
 import styled, { createGlobalStyle } from "styled-components"
 
 import "../fonts/fonts.css"
-import "swiper/swiper-bundle.css"
 import "./layout.css"
 
 const GlobalStyle = createGlobalStyle`
