@@ -48,8 +48,8 @@ const SliderSection = styled.section`
       height: 800px;
   }
 
-  .gatsby-image-wrapper {
-    height: 100%;
+  img {
+    width:100%;
   }
 
   .swiper-button-next, .swiper-button-prev {
@@ -132,7 +132,7 @@ const Slider = (props) => {
               <h2>{slide.title}</h2>
               <p>{slide.description}</p>
             </Container>
-            <Img fluid={slide.image.fluid} />
+            <img src={slide.image.fluid.src} data-srcset={slide.image.fluid.srcSet} alt={slide.image.title} />
           </SwiperSlide>
         ))}
       </Swiper>
@@ -202,6 +202,7 @@ export const query = graphql`
             srcSet
             sizes
           }
+          title
         }
       }
     }
