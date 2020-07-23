@@ -8,9 +8,26 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
-import styled from "styled-components"
+import styled, { createGlobalStyle } from "styled-components"
 
+import "../fonts/fonts.css"
 import "./layout.css"
+
+const GlobalStyle = createGlobalStyle`
+  h1, h2, h3, h4, h5, p {
+    font-family: "Nhaasgrotesktxpro 55rg";
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  body {
+    color: #fff;
+    background-color: #000;
+    text-transform: uppercase;
+    font-size: 14px;
+    line-height: 20px;
+  }
+`
 
 const Main = styled.main`
   max-width: 800px;
@@ -30,6 +47,7 @@ const Layout = ({ children }) => {
 
   return (
     <>
+      <GlobalStyle />
       <Main>{children}</Main>
     </>
   )

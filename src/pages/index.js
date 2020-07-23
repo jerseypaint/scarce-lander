@@ -17,14 +17,19 @@ const Container = styled.div`
 `
 
 const HeroSection = styled.section`
-  padding-bottom: 51px;
 
   h1 {
     text-align: center;
     font-size: 14px;
     line-height: 20px;
     max-width: 285px;
+    display: block;
+    position: absolute;
     margin: 0 auto;
+    top: 301px;
+    left: 0;
+    right: 0;
+    vertical-align: middle;
   }
 
   .gatsby-image-wrapper {
@@ -64,6 +69,7 @@ const Form = styled.form`
   label {
     font-size: 12px;
     line-height: 20px;
+    margin-bottom: 5px;
   }
 
   input[type="email"], input[type="text"] {

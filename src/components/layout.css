@@ -620,10 +620,3 @@ pre tt:after {
     font-size: 100%;
   }
 }
-
-body {
-  color: #fff;
-  background-color: #000;
-  text-transform: uppercase;
-  font-size: 14px;
-}
