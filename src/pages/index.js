@@ -96,6 +96,7 @@ const Form = styled.form`
 
     &::placeholder {
       color: #ccc;
+      font-size: 10px;
     }
   }
 
