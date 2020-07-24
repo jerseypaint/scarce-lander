@@ -1,8 +1,9 @@
-import React from "react"
+import React, { useRef, useState } from "react"
 import { graphql } from "gatsby"
 import styled from "styled-components"
 import { Swiper, SwiperSlide } from 'swiper/react'
 import SwiperCore, { Navigation } from 'swiper'
+import addToMailchimp from 'gatsby-plugin-mailchimp'
 
 import Img from "gatsby-image"
 import Layout from "../components/layout"
@@ -110,6 +111,36 @@ const Form = styled.form`
   }
 `
 
+const Message = styled.div`
+  display: none;
+  border-radius: 0;
+  border: 1px solid;
+  font-size: 10px;
+
+  ${props => props.success ? 
+  `display: block;
+   border-color: green;
+   color: green;
+  ` : ``
+  }
+
+  ${props => props.error ? 
+    `display: block;
+     border-color: red;
+     color: red;
+    ` : ``
+  }
+
+  p {
+    margin-bottom: 0;
+  }
+`
+
+const BotField = styled.div`
+  position: absolute;
+  left: -5000px;
+`
+
 const Hero = (props) => (
   <HeroSection>
     <Container>
@@ -123,7 +154,11 @@ const Slider = (props) => {
 
   
   return (
-    <SliderSection>
+    <SliderSection
+      data-sal="fade"
+      data-sal-duration="600"
+      data-sal-easing="ease"
+    >
       <Swiper
         speed={700}
         spaceBetween={0}
@@ -132,7 +167,7 @@ const Slider = (props) => {
         navigation
       >
         {props.slides.map( slide => (
-          <SwiperSlide>
+          <SwiperSlide key={slide.title}>
             <Container>
               <h2>{slide.title}</h2>
               <p>{slide.description}</p>
@@ -146,27 +181,94 @@ const Slider = (props) => {
 }
 
 const ContactForm = (props) => {
+
+  const [email, setEmail] = useState(null)
+  const [listFields, setListFields] = useState({
+    FNAME: null,
+    PHONE: null
+  })
+  const [error, setError] = useState(false)
+  const [success, setSuccess] = useState(false)
+
+  const [honey, setHoney] = useState(null)
+
+  const fNameInput = useRef(null)
+  const emailInput = useRef(null)
+  const phoneInput = useRef(null)
+  const honeyInput =useRef(null)
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+
+    if (email !=null && listFields.FNAME != null && honey == null) {
+        addToMailchimp(email, listFields)
+        .then(data => {
+          if (data.result === "error") {
+            setSuccess(false)
+            setError(email + ` is already subscribed`)
+            console.log(data)
+          } else {
+            setError(false)
+            setSuccess(true)
+          }
+        })
+        .catch(() => {
+          console.log("error")
+        })
+      }
+    else {
+      setSuccess(false)
+      let error = ""
+        if (email != null) {
+            error = "Please enter your name"
+        } else if (listFields.FNAME != null){
+            error = "Please enter your email"
+        } else {
+            error = "Please enter your name and email"
+        }
+        setError(error)
+      }
+    }
+
+  const handleChange = e => {
+    setEmail(emailInput.current.value ? emailInput.current.value : null)
+    setListFields({
+      FNAME: fNameInput.current.value ? fNameInput.current.value : null,
+      PHONE: phoneInput.current.value ? phoneInput.current.value : null
+    })
+    setHoney(honeyInput.current.value ? honeyInput.current.value : null)
+  }
+
   return (
-    <section>
+    <section
+      data-sal="fade"
+      data-sal-duration="600"
+      data-sal-easing="ease"
+    >
       <Container>
         <div id="mc_embed_signup">
-          <Form action="https://ockupy.us11.list-manage.com/subscribe/post?u=253768e3965b590e3a100c35d&amp;id=6c8e8c91e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank" novalidate>
+          <Form onSubmit={(e) => handleSubmit(e, emailInput.current.value, {
+            FNAME: fNameInput.current.value,
+            PHONE: phoneInput.current.value
+          })}>
                 <h2>{props.title}</h2>
-                <label for="mce-FNAME">First Name </label>
-                <input type="text" defaultValue="" name="FNAME" id="mce-FNAME" />
+                <label htmlFor="mce-FNAME">First Name </label>
+                <input ref={fNameInput} onChange={handleChange} type="text" defaultValue="" name="FNAME" id="mce-FNAME" />
 
-                <label for="mce-EMAIL">Email Address </label>
-                <input type="email" defaultValue="" name="EMAIL" id="mce-EMAIL" />
+                <label htmlFor="mce-EMAIL">Email Address </label>
+                <input ref={emailInput} onChange={handleChange} type="email" defaultValue="" name="EMAIL" id="mce-EMAIL" />
 
-                <label for="mce-PHONE">Phone Number </label>
-                <input type="text" name="PHONE" defaultValue="" id="mce-PHONE" placeholder="BE THE FIRST TO GET THE DROP" />
-
-                <div id="mce-responses">
-                  <div id="mce-error-response"></div>
-                  <div id="mce-success-response"></div>
-                </div>
-                <div aria-hidden="true" className="hidden"><input type="text" name="b_253768e3965b590e3a100c35d_6c8e8c91e8" tabindex="-1" value="" /></div>
+                <label htmlFor="mce-PHONE">Phone Number </label>
+                <input ref={phoneInput} onChange={handleChange} type="text" name="PHONE" defaultValue="" id="mce-PHONE" placeholder="BE THE FIRST TO GET THE DROP" />
+                <BotField aria-hidden="true">
+                  <input ref={honeyInput} onChange={handleChange} type="text" name="b_70fbe7f7141fc7cf57a73a5aa_f2a93846ba" tabIndex="-1" value="" />
+                </BotField>
+                <Message error={error} success={success}>
+                  {error && (<p>{error}</p>)}
+                  {success && (<p>You've successfully joined</p>)}
+                </Message>
                 <input type="submit" value="Join Now" name="subscribe" id="mc-embedded-subscribe" />
+
           </Form>
         </div>
       </Container>
@@ -192,20 +294,16 @@ export const query = graphql`
         heroDescription
       }
       heroImage {
-        fluid {
-          sizes
-          src
-          srcSet
+        fluid(maxWidth:1000)  {
+          ...GatsbyContentfulFluid
         }
       }
       slider {
         title
         description
         image {
-          fluid {
-            src
-            srcSet
-            sizes
+          fluid(maxWidth:1000) {
+            ...GatsbyContentfulFluid
           }
         }
       }
