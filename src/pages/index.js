@@ -53,7 +53,10 @@ const SliderSection = styled.section`
   }
 
   .swiper-button-next, .swiper-button-prev {
-    color: #3898EC;
+    color: #fff;
+    &:after {
+      font-size: 32px;
+    }
   }
 `
 
@@ -81,7 +84,7 @@ const Form = styled.form`
     height: 38px;
     padding: 8px 12px;
     margin-bottom: 10px;
-    font-size: 10px;
+    font-size: 16px;
     line-height: 1.42857143;
     color: #ff2b2b;
     outline: none;
