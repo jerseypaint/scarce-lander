@@ -37,11 +37,22 @@ const HeroSection = styled.section`
   }
 `
 
+const SlideContainer = styled(Container)`
+  position: absolute;
+  padding: 1rem;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  color: ${props => props.lightTheme ? `#000` : `#fff`};
+`
+
 const SliderSection = styled.section`
+
   padding-bottom: 51px;
 
   h2 {
     font-size: 40px;
+    margin-bottom: 16px;
   }
 
   .swiper-container {
@@ -146,7 +157,11 @@ const BotField = styled.div`
 `
 
 const Hero = (props) => (
-  <HeroSection>
+  <HeroSection
+    data-sal="fade"
+    data-sal-duration="800"
+    data-sal-easing="ease"
+  >
     <Container>
       <Img fluid={props.image} />
       <h1>{props.description}</h1>
@@ -155,7 +170,6 @@ const Hero = (props) => (
 )
 
 const Slider = (props) => {
-
   
   return (
     <SliderSection
@@ -172,10 +186,10 @@ const Slider = (props) => {
       >
         {props.slides.map( slide => (
           <SwiperSlide key={slide.title}>
-            <Container>
+            <SlideContainer lightTheme={slide.textColorLight}>
               <h2>{slide.title}</h2>
               <p>{slide.description}</p>
-            </Container>
+            </SlideContainer>
             <Img fluid={slide.image.fluid} />
           </SwiperSlide>
         ))}
@@ -244,26 +258,38 @@ const ContactForm = (props) => {
   }
 
   return (
-    <section
-      data-sal="fade"
-      data-sal-duration="600"
-      data-sal-easing="ease"
-    >
+    <section>
       <Container>
         <div id="mc_embed_signup">
           <Form onSubmit={(e) => handleSubmit(e, emailInput.current.value, {
             FNAME: fNameInput.current.value,
             PHONE: phoneInput.current.value
           })}>
-                <h2>{props.title}</h2>
-                <label htmlFor="mce-FNAME">First Name </label>
-                <input ref={fNameInput} onChange={handleChange} type="text" defaultValue="" name="FNAME" id="mce-FNAME" />
-
-                <label htmlFor="mce-EMAIL">Email Address </label>
-                <input ref={emailInput} onChange={handleChange} type="email" defaultValue="" name="EMAIL" id="mce-EMAIL" />
-
-                <label htmlFor="mce-PHONE">Phone Number </label>
-                <input ref={phoneInput} onChange={handleChange} type="text" name="PHONE" defaultValue="" id="mce-PHONE" placeholder="BE THE FIRST TO GET THE DROP" />
+                <div
+                  data-sal="fade"
+                  data-sal-delay="250"
+                  data-sal-duration="1000"
+                  data-sal-easing="ease">
+                    <h2>{props.title}</h2>
+                    <label htmlFor="mce-FNAME">First Name </label>
+                    <input ref={fNameInput} onChange={handleChange} type="text" defaultValue="" name="FNAME" id="mce-FNAME" />
+                </div>
+                <div
+                  data-sal="fade"
+                  data-sal-delay="500"
+                  data-sal-duration="1000"
+                  data-sal-easing="ease">
+                    <label htmlFor="mce-EMAIL">Email Address </label>
+                    <input ref={emailInput} onChange={handleChange} type="email" defaultValue="" name="EMAIL" id="mce-EMAIL" />
+                </div>
+                <div
+                  data-sal="fade"
+                  data-sal-delay="750"
+                  data-sal-duration="1000"
+                  data-sal-easing="ease">
+                    <label htmlFor="mce-PHONE">Phone Number </label>
+                    <input ref={phoneInput} onChange={handleChange} type="text" name="PHONE" defaultValue="" id="mce-PHONE" placeholder="BE THE FIRST TO GET THE DROP" />
+                </div>
                 <BotField aria-hidden="true">
                   <input ref={honeyInput} onChange={handleChange} type="text" name="b_70fbe7f7141fc7cf57a73a5aa_f2a93846ba" tabIndex="-1" value="" />
                 </BotField>
@@ -271,8 +297,13 @@ const ContactForm = (props) => {
                   {error && (<p>{error}</p>)}
                   {success && (<p>You've successfully joined</p>)}
                 </Message>
-                <input type="submit" value="Join Now" name="subscribe" id="mc-embedded-subscribe" />
-
+                <div
+                  data-sal="fade"
+                  data-sal-delay="1000"
+                  data-sal-duration="800"
+                  data-sal-easing="ease">
+                    <input type="submit" value="Join Now" name="subscribe" id="mc-embedded-subscribe" />
+                </div>
           </Form>
         </div>
       </Container>
@@ -310,6 +341,7 @@ export const query = graphql`
             ...GatsbyContentfulFluid
           }
         }
+        textColorLight
       }
     }
   }
