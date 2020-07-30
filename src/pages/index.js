@@ -26,14 +26,14 @@ const HeroSection = styled.section`
     display: block;
     position: absolute;
     margin: 0 auto;
-    top: 205px;
+    top: 179px;
     left: 0;
     right: 0;
     vertical-align: middle;
   }
 
   .gatsby-image-wrapper {
-    height:400px;
+    height:364px;
   }
 `
 
@@ -78,12 +78,15 @@ const Form = styled.form`
     font-size: 14px;
     text-align: center;
     line-height: 16px;
+    margin-bottom: 36px;
+    margin-top: 1px;
   }
 
   label {
     font-size: 12px;
     line-height: 20px;
     margin-bottom: 5px;
+    font-weight: bold;
   }
 
   input[type="email"], input[type="text"] {
