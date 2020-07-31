@@ -13,7 +13,7 @@ import "../fonts/fonts.css"
 import "./layout.css"
 
 const GlobalStyle = createGlobalStyle`
-  h1, h2, h3, h4, h5, p, label, input {
+  body, h1, h2, h3, h4, h5, p, label, input {
     font-family: "Nhaasgrotesktxpro 55rg";
     font-weight: normal;
     font-style: normal;

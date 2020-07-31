@@ -37,42 +37,17 @@ const HeroSection = styled.section`
   }
 `
 
-const SlideContainer = styled(Container)`
-  position: absolute;
-  padding: 1rem;
-  top: 0;
-  left: 0;
-  z-index: 2;
-  color: ${props => props.lightTheme ? `#000` : `#fff`};
-`
+const FeatureList = styled.ul`
+  font-size: 12px;
+  margin-bottom: 42px;
 
-const SliderSection = styled.section`
-
-  padding-bottom: 51px;
-
-  h2 {
-    font-size: 40px;
-    margin-bottom: 16px;
-  }
-
-  .swiper-container {
-      height: 800px;
-  }
-
-  .gatsby-image-wrapper {
-    height: 100%;
-  }
-
-  .swiper-button-next, .swiper-button-prev {
-    color: #fff;
-    &:after {
-      font-size: 32px;
-    }
+  li {
+    margin-bottom: 0;
   }
 `
 
 const Form = styled.form`
-  padding-bottom: 51px;
+  margin-bottom: 42px;
 
   h2 {
     font-size: 14px;
@@ -159,10 +134,43 @@ const BotField = styled.div`
   left: -5000px;
 `
 
+const SliderSection = styled.section`
+  padding-bottom: 51px;
+
+  h2 {
+    font-size: 40px;
+    margin-bottom: 16px;
+  }
+
+  .swiper-container {
+      height: 800px;
+  }
+
+  .gatsby-image-wrapper {
+    height: 100%;
+  }
+
+  .swiper-button-next, .swiper-button-prev {
+    color: #fff;
+    &:after {
+      font-size: 32px;
+    }
+  }
+`
+
+const SlideContainer = styled(Container)`
+  position: absolute;
+  padding: 42px 1rem 1rem;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  color: ${props => props.lightTheme ? `#000` : `#fff`};
+`
+
 const Hero = (props) => (
   <HeroSection
     data-sal="fade"
-    data-sal-duration="800"
+    data-sal-duration="1000"
     data-sal-easing="ease"
   >
     <Container>
@@ -171,35 +179,6 @@ const Hero = (props) => (
     </Container>
   </HeroSection>
 )
-
-const Slider = (props) => {
-  
-  return (
-    <SliderSection
-      data-sal="fade"
-      data-sal-duration="600"
-      data-sal-easing="ease"
-    >
-      <Swiper
-        speed={700}
-        spaceBetween={0}
-        slidesPerView={1}
-        loop={true}
-        navigation
-      >
-        {props.slides.map( slide => (
-          <SwiperSlide key={slide.title}>
-            <SlideContainer lightTheme={slide.textColorLight}>
-              <h2>{slide.title}</h2>
-              <p>{slide.description}</p>
-            </SlideContainer>
-            <Img fluid={slide.image.fluid} />
-          </SwiperSlide>
-        ))}
-      </Swiper>
-    </SliderSection>
-  )
-}
 
 const ContactForm = (props) => {
 
@@ -303,8 +282,9 @@ const ContactForm = (props) => {
                 <div
                   data-sal="fade"
                   data-sal-delay="1000"
-                  data-sal-duration="800"
-                  data-sal-easing="ease">
+                  data-sal-duration="1000"
+                  data-sal-easing="ease"
+                  >
                     <input type="submit" value="Join Now" name="subscribe" id="mc-embedded-subscribe" />
                 </div>
           </Form>
@@ -314,12 +294,67 @@ const ContactForm = (props) => {
   )
 }
 
+const Features = (props) => (
+  <section>
+    <Container>
+      <FeatureList>
+        {props.list.map( (item, index) => (
+          <li
+          key={index}
+          data-sal="fade"
+          data-sal-delay="1000"
+          data-sal-duration="1000"
+          data-sal-easing="ease"
+          >{item}</li>
+        ))}
+      </FeatureList>
+    </Container>
+    <div
+      data-sal="fade"
+      data-sal-duration="800"
+      data-sal-easing="ease"
+      >
+        <Img fluid={props.image} />
+      </div>
+  </section>
+)
+
+
+const Slider = (props) => {
+  
+  return (
+    <SliderSection
+      data-sal="fade"
+      data-sal-duration="1000"
+      data-sal-easing="ease"
+    >
+      <Swiper
+        speed={700}
+        spaceBetween={0}
+        slidesPerView={1}
+        loop={true}
+        navigation
+      >
+        {props.slides.map( slide => (
+          <SwiperSlide key={slide.title}>
+            <SlideContainer lightTheme={slide.textColorLight}>
+              <h2>{slide.title}</h2>
+              <p>{slide.description}</p>
+            </SlideContainer>
+            <Img fluid={slide.image.fluid} />
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </SliderSection>
+  )
+}
 
 const IndexPage = ({data}) => (
   <Layout>
     <SEO title="Home" />
     <Hero image={data.contentfulLandingPage.heroImage.fluid} description={data.contentfulLandingPage.heroDescription.heroDescription} />
     <ContactForm title={data.contentfulLandingPage.formTitle} />
+    <Features image={data.contentfulLandingPage.featureListImage.fluid} list={data.contentfulLandingPage.featureList} />
     <Slider slides={data.contentfulLandingPage.slider} />
   </Layout>
 )
@@ -332,6 +367,12 @@ export const query = graphql`
         heroDescription
       }
       heroImage {
+        fluid(maxWidth:1000)  {
+          ...GatsbyContentfulFluid
+        }
+      }
+      featureList
+      featureListImage {
         fluid(maxWidth:1000)  {
           ...GatsbyContentfulFluid
         }
