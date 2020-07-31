@@ -26,14 +26,14 @@ const HeroSection = styled.section`
     display: block;
     position: absolute;
     margin: 0 auto;
-    top: 179px;
+    top: 175px;
     left: 0;
     right: 0;
     vertical-align: middle;
   }
 
   .gatsby-image-wrapper {
-    height:364px;
+    height:359px;
   }
 `
 
@@ -78,8 +78,8 @@ const Form = styled.form`
     font-size: 14px;
     text-align: center;
     line-height: 16px;
-    margin-bottom: 36px;
-    margin-top: 1px;
+    margin-bottom: 34px;
+    margin-top: 0px;
   }
 
   label {
