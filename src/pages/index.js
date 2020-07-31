@@ -325,7 +325,7 @@ const Slider = (props) => {
   return (
     <SliderSection
       data-sal="fade"
-      data-sal-duration="1000"
+      data-sal-duration="700"
       data-sal-easing="ease"
     >
       <Swiper
