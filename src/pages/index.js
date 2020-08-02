@@ -86,7 +86,7 @@ const Form = styled.form`
     &::placeholder {
       color: #ccc;
       font-size: 10px;
-      line-height: 38px;
+      line-height: normal;
     }
   }
 
@@ -369,13 +369,13 @@ export const query = graphql`
       }
       heroImage {
         fluid(maxWidth:1000)  {
-          ...GatsbyContentfulFluid
+          ...GatsbyContentfulFluid_withWebp
         }
       }
       featureList
       featureListImage {
         fluid(maxWidth:1000)  {
-          ...GatsbyContentfulFluid
+          ...GatsbyContentfulFluid_withWebp
         }
       }
       slider {
@@ -383,7 +383,7 @@ export const query = graphql`
         description
         image {
           fluid(maxWidth:1000) {
-            ...GatsbyContentfulFluid
+            ...GatsbyContentfulFluid_withWebp
           }
         }
         textColorLight
