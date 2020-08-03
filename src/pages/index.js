@@ -8,6 +8,7 @@ import addToMailchimp from 'gatsby-plugin-mailchimp'
 import Img from "gatsby-image"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import fbq from "gatsby-plugin-facebook-pixel"
 
 SwiperCore.use([Navigation])
 
@@ -211,6 +212,7 @@ const ContactForm = (props) => {
           } else {
             setError(false)
             setSuccess(true)
+            fbq('track', 'CompleteRegistration');
           }
         })
         .catch(() => {
