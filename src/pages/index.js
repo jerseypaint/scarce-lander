@@ -215,8 +215,8 @@ const ContactForm = (props) => {
             fbq('track', 'CompleteRegistration');
           }
         })
-        .catch(() => {
-          console.log("error")
+        .catch((e) => {
+          console.log("error", e)
         })
       }
     else {
