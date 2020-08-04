@@ -8,7 +8,6 @@ import addToMailchimp from 'gatsby-plugin-mailchimp'
 import Img from "gatsby-image"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import fbq from "gatsby-plugin-facebook-pixel"
 
 SwiperCore.use([Navigation])
 
@@ -76,7 +75,7 @@ const Form = styled.form`
     margin-bottom: 10px;
     font-size: 16px;
     line-height: 1.42857143;
-    color: #ff2b2b;
+    color: #fff;
     outline: none;
 
     &:focus {
@@ -87,7 +86,7 @@ const Form = styled.form`
     &::placeholder {
       color: #ccc;
       font-size: 10px;
-      line-height: normal;
+      line-height: 18px;
     }
   }
 
@@ -212,7 +211,13 @@ const ContactForm = (props) => {
           } else {
             setError(false)
             setSuccess(true)
-            fbq('track', 'CompleteRegistration');
+
+            if (typeof window !== "undefined") {
+              if (window.fbq != null) { 
+                window.fbq('track', 'CompleteRegistration')
+              }
+            }
+            
           }
         })
         .catch((e) => {
