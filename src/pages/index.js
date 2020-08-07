@@ -4,6 +4,7 @@ import styled from "styled-components"
 import { Swiper, SwiperSlide } from 'swiper/react'
 import SwiperCore, { Navigation } from 'swiper'
 import addToMailchimp from 'gatsby-plugin-mailchimp'
+import { AnchorLink } from "gatsby-plugin-anchor-links"
 
 import Img from "gatsby-image"
 import Layout from "../components/layout"
@@ -159,9 +160,25 @@ const SliderSection = styled.section`
   }
 `
 
+const CallToAction = styled.div`
+  padding: 2rem 1rem;
+  text-align: center;
+
+  a {
+    padding: 6px 15px;
+    margin-top: 23px;
+    border: 1px white solid;
+    border-radius: 0px;
+    background-color: #fff;
+    color: #000;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+`
+
 const SlideContainer = styled(Container)`
   position: absolute;
-  padding: 42px 1rem 1rem;
+  padding: 42px 1rem;
   top: 0;
   left: 0;
   z-index: 2;
@@ -248,7 +265,7 @@ const ContactForm = (props) => {
   }
 
   return (
-    <section>
+    <section id="form">
       <Container>
         <div id="mc_embed_signup">
           <Form onSubmit={(e) => handleSubmit(e, emailInput.current.value, {
@@ -261,7 +278,7 @@ const ContactForm = (props) => {
                   data-sal-duration="1000"
                   data-sal-easing="ease">
                     <h2>{props.title}</h2>
-                    <label htmlFor="mce-FNAME">First Name </label>
+                    <label htmlFor="mce-FNAME">Full Name </label>
                     <input ref={fNameInput} onChange={handleChange} type="text" defaultValue="" name="FNAME" id="mce-FNAME" />
                 </div>
                 <div
@@ -285,7 +302,7 @@ const ContactForm = (props) => {
                 </BotField>
                 <Message error={error} success={success}>
                   {error && (<p>{error}</p>)}
-                  {success && (<p>You've successfully joined</p>)}
+                  {success && (<p>Success! Drops incoming - stay tuned</p>)}
                 </Message>
                 <div
                   data-sal="fade"
@@ -382,6 +399,9 @@ const Slider = (props) => {
           </SwiperSlide>
         ))}
       </Swiper>
+      <CallToAction>
+        <AnchorLink to="/#form" title="Sign up" />
+      </CallToAction>
     </SliderSection>
   )
 }
