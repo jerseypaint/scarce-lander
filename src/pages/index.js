@@ -231,7 +231,7 @@ const ContactForm = (props) => {
 
             if (typeof window !== "undefined") {
               if (window.fbq != null) { 
-                window.fbq('track', 'CompleteRegistration')
+                window.fbq('track', 'CompleteRegistration', {currency: "USD", value: 0.00})
               }
             }
             
