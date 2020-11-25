@@ -5,6 +5,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import SwiperCore, { Navigation } from 'swiper'
 import addToMailchimp from 'gatsby-plugin-mailchimp'
 import { AnchorLink } from "gatsby-plugin-anchor-links"
+import Countdown from 'react-countdown';
 
 import Img from "gatsby-image"
 import Layout from "../components/layout"
@@ -35,6 +36,29 @@ const HeroSection = styled.section`
 
   .gatsby-image-wrapper {
     height:359px;
+  }
+`
+
+const CountdownContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 42px;
+`
+
+const CountdownItem = styled.div`
+  padding: 0 2.5px;
+
+  div {
+    &:nth-of-type(1) {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    &:nth-of-type(2){ 
+      font-size: 11px;
+    }
   }
 `
 
@@ -184,8 +208,42 @@ const SlideContainer = styled(Container)`
   z-index: 2;
   color: ${props => props.lightTheme ? `#000` : `#fff`};
 `
+ 
+// Renderer callback with condition
+const renderer = ({ days, hours, minutes, seconds}) => {
+return (
+  <>
+    <CountdownItem>
+      <div>{days}</div>
+      <div>days</div>
+    </CountdownItem>
+    <CountdownItem>
+      <div>:</div>
+    </CountdownItem>
+    <CountdownItem>
+      <div>{hours}</div>
+      <div>hours</div>
+    </CountdownItem>
+    <CountdownItem>
+      <div>:</div>
+    </CountdownItem>
+    <CountdownItem>
+      <div>{minutes}</div>
+      <div>minutes</div>
+    </CountdownItem>
+    <CountdownItem>
+      <div>:</div>
+    </CountdownItem>
+    <CountdownItem>
+      <div>{seconds}</div>
+      <div>seconds</div>
+    </CountdownItem>
+  </>
+  )
+};
 
 const Hero = (props) => (
+  <>
   <HeroSection
     data-sal="fade"
     data-sal-duration="1000"
@@ -196,6 +254,19 @@ const Hero = (props) => (
       <h1>{props.description}</h1>
     </Container>
   </HeroSection>
+  <div>
+    <Container>
+      <CountdownContainer>
+        <Countdown
+          date={"2020-12-08T12:00:00"}
+          intervalDelay={0}
+          precision={1}
+          renderer={renderer}
+        />
+      </CountdownContainer>
+    </Container>
+  </div>
+  </>
 )
 
 const ContactForm = (props) => {
