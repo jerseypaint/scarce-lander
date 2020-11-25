@@ -254,7 +254,12 @@ const Hero = (props) => (
       <h1>{props.description}</h1>
     </Container>
   </HeroSection>
-  <div>
+  <div
+    data-sal="fade"
+    data-sal-delay="250"
+    data-sal-duration="1000"
+    data-sal-easing="ease"
+  >
     <Container>
       <CountdownContainer>
         <Countdown
@@ -428,7 +433,7 @@ const Features = (props) => {
           <li
           key={index}
           data-sal="fade"
-          data-sal-delay={windowSize.width >= 469 ? `1000` : `0`}
+          data-sal-delay={windowSize.height >= 720 ? `1000` : `0`}
           data-sal-duration="1000"
           data-sal-easing="ease"
           >{item}</li>
