@@ -254,7 +254,6 @@ const Hero = (props) => (
       <h1>{props.description}</h1>
     </Container>
   </HeroSection>
-  {/* Remove for now 
   <div
     data-sal="fade"
     data-sal-delay="250"
@@ -264,7 +263,7 @@ const Hero = (props) => (
     <Container>
       <CountdownContainer>
         <Countdown
-          date={"2020-12-08T12:00:00"}
+          date={"2020-12-17T13:00:00"}
           intervalDelay={0}
           precision={1}
           renderer={renderer}
@@ -272,7 +271,6 @@ const Hero = (props) => (
       </CountdownContainer>
     </Container>
   </div>
-  */}
   </>
 )
 
