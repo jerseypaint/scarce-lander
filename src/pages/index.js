@@ -208,7 +208,19 @@ const SlideContainer = styled(Container)`
   z-index: 2;
   color: ${props => props.lightTheme ? `#000` : `#fff`};
 `
- 
+const FooterGrid = styled.div`
+  display: flex;
+  
+  div {
+    margin-right: 2rem;
+  }
+  h2 {
+    font-size: 1.2rem;
+  }
+  a {
+    color: #fff;
+  }
+`
 // Renderer callback with condition
 const renderer = ({ days, hours, minutes, seconds}) => {
 return (
@@ -254,23 +266,26 @@ const Hero = (props) => (
       <h1>{props.description}</h1>
     </Container>
   </HeroSection>
-  <div
-    data-sal="fade"
-    data-sal-delay="250"
-    data-sal-duration="1000"
-    data-sal-easing="ease"
-  >
-    <Container>
-      <CountdownContainer>
-        <Countdown
-          date={"2020-12-17T13:00:00"}
-          intervalDelay={0}
-          precision={1}
-          renderer={renderer}
-        />
-      </CountdownContainer>
-    </Container>
-  </div>
+
+  {/* Hide Counter 
+    <div
+      data-sal="fade"
+      data-sal-delay="250"
+      data-sal-duration="1000"
+      data-sal-easing="ease"
+    >
+      <Container>
+        <CountdownContainer>
+          <Countdown
+            date={"2020-12-17T13:00:00"}
+            intervalDelay={0}
+            precision={1}
+            renderer={renderer}
+          />
+        </CountdownContainer>
+      </Container>
+    </div>
+  */}
   </>
 )
 
@@ -483,6 +498,28 @@ const Slider = (props) => {
   )
 }
 
+const Footer = () => {
+
+  return (
+    <section>
+      <Container>
+        <FooterGrid>
+          <div>
+            <h4>Contact Us:</h4>
+            <p><a href="mailto:info@scarce.us">info@scarce.us</a></p>
+          </div>
+          <div>
+            <h4>Follow Us:</h4>
+            <p><a href="https://www.instagram.com/scarce.us/" title="Scarce on Instagram">Instagram</a></p>
+          </div>
+        </FooterGrid>
+
+      </Container>
+    </section>
+  )
+
+}
+
 const IndexPage = ({data}) => (
   <Layout>
     <SEO title="Home" />
@@ -490,6 +527,7 @@ const IndexPage = ({data}) => (
     <ContactForm title={data.contentfulLandingPage.formTitle} />
     <Features image={data.contentfulLandingPage.featureListImage.fluid} list={data.contentfulLandingPage.featureList} />
     <Slider slides={data.contentfulLandingPage.slider} />
+    <Footer />
   </Layout>
 )
 
