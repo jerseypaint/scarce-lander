@@ -309,7 +309,7 @@ const ContactForm = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    if (email !=null && listFields.FNAME != null && honey == null) {
+    if (email !=null && listFields.FNAME != null && listFields.PHONE && honey == null) {
         addToMailchimp(email, listFields)
         .then(data => {
           if (data.result === "error") {
