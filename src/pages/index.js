@@ -340,7 +340,7 @@ const ContactForm = (props) => {
             error = "Please enter your name"
         } else if (listFields.FNAME != null){
             error = "Please enter your email"
-        } else if (listFields.PHONE == null){
+        } else if (email != null && listFields.FNAME != null){
           error = "Please enter your phone number"
         } else {
             error = "Please enter your name, email, and phone number"
