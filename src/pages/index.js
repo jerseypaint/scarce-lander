@@ -79,7 +79,7 @@ const Form = styled.form`
     text-align: center;
     line-height: 16px;
     margin-bottom: 34px;
-    margin-top: 0px;
+    margin-top: 34px;
   }
 
   label {
@@ -404,7 +404,7 @@ const ContactForm = (props) => {
                   data-sal-duration="1000"
                   data-sal-easing="ease"
                   >
-                    <input type="submit" value="Join Now" name="subscribe" id="mc-embedded-subscribe" />
+                    <input type="submit" value="Join Waitlist" name="subscribe" id="mc-embedded-subscribe" />
                 </div>
           </Form>
         </div>
